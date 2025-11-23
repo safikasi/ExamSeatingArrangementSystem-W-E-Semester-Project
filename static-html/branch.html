@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Branch wise timetable</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/static.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">Exam Seating Arrangement</a>
+      </div>
+      <div class="collapse navbar-collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="select.html">Search</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:120px; padding-bottom:60px;">
+    <a href="select.html" class="btn btn-link">&larr; back</a>
+    <div class="row">
+      <div class="col-md-4">
+        <form data-branch-form class="result-card">
+          <h3>Branch timetable</h3>
+          <p>Choose a branch and year to view all scheduled exams and current seating allocations.</p>
+          <div class="form-group">
+            <label for="branch">Branch</label>
+            <select class="form-control" id="branch" data-branch-select required></select>
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <select class="form-control" id="year" data-year-select required></select>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Show timetable</button>
+        </form>
+      </div>
+      <div class="col-md-8">
+        <div data-branch-output class="muted-card">
+          Pick a branch and academic year to load details.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/sample-data.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+
+</html>
+

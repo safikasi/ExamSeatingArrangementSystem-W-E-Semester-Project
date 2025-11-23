@@ -13,25 +13,24 @@
 <body>
   <a href="selectoneof3.php" class="btn  btn-sm"><span class="glyphicon glyphicon-chevron-left"></span>back</a>
   <?php
-   $server='localhost';
-   $dbuser='root';
-   $dbpass='alkesha15';
-   $db='trial';
-  $conn=mysqli_connect($server,$dbuser,$dbpass,$db);//database connection
+  require_once __DIR__ . '/config.php';
+  $conn = get_db_connection();
   mysqli_query($conn,"UPDATE viewcount set views=views+1 where pagename='lecturehalldata'");
   $re=mysqli_query($conn,"SELECT * from viewcount where pagename='lecturehalldata' ");
   while ($view=mysqli_fetch_array($re)) {
   ?>
   <span class="glyphicon glyphicon-eye-open"></span><?php echo " ".$view['views'];} ?>
   <?php
-  $classroomtake=$_POST["classroom"]; //classroom which is enter taken here
-  if($classroomtake)
-{
-foreach ($classroomtake as $cl )
-{
-$class=mysqli_real_escape_string($conn,$cl);
-}
-}
+  $class='';
+  if(!empty($_POST["classroom"]) && is_array($_POST["classroom"])){
+    foreach ($_POST["classroom"] as $cl ){
+      $class=mysqli_real_escape_string($conn,$cl);
+    }
+  }
+  if($class===''){
+    echo "<div class='alert alert-warning text-center'>No classroom selected.</div>";
+    exit;
+  }
 $branchq="SELECT distinct department from trisub where classroom='$class'";//distinct department selection
 $retvalbranch=mysqli_query($conn,$branchq);
 $yearq="SELECT distinct year from trisub where classroom='$class'";//distinct year selection
@@ -123,6 +122,34 @@ $count1=1; ?>
 <?php $count1=$count1+1;} ?>
 </tr>
 </table>
+</div>
+
+<div class="container" style="max-width:640px;margin-top:20px;">
+  <div class="panel panel-info">
+    <div class="panel-heading">Export this seating plan</div>
+    <div class="panel-body">
+      <form class="form-horizontal" action="generate_classroom_pdf.php" method="post" target="_blank">
+        <input type="hidden" name="classroom" value="<?php echo htmlspecialchars($class,ENT_QUOTES); ?>">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Invigilator (optional)</label>
+          <div class="col-sm-8">
+            <input type="text" name="invigilator" class="form-control" placeholder="e.g. Dr. Sohail Ahmed">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Notes (optional)</label>
+          <div class="col-sm-8">
+            <input type="text" name="notes" class="form-control" placeholder="Special instructions or exam title">
+          </div>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-download-alt"></span> Download PDF
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 </body>
 </html>

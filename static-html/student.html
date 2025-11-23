@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student lookup</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/static.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">Exam Seating Arrangement</a>
+      </div>
+      <div class="collapse navbar-collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="select.html">Search</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:120px; padding-bottom:60px;">
+    <a href="select.html" class="btn btn-link">&larr; back</a>
+    <div class="row">
+      <div class="col-md-4">
+        <form data-student-form class="result-card">
+          <h3>Find your seat</h3>
+          <p>Enter your enrollment / roll number exactly as printed on your admit card.</p>
+          <div class="form-group">
+            <label for="rollno">Enrollment number</label>
+            <input type="text" class="form-control" id="rollno" name="rollno" placeholder="e.g. CSE21001" required />
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="col-md-8">
+        <div data-student-output class="muted-card">
+          Enter an enrollment number to preview seat details.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/sample-data.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+
+</html>
+
